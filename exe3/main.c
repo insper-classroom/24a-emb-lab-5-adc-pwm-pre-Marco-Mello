@@ -25,13 +25,21 @@ void data_task(void *p) {
 
 void process_task(void *p) {
     int data = 0;
-
+    int dataMovel[5];
     while (true) {
+
         if (xQueueReceive(xQueueData, &data, 100)) {
+            dataMovel[0] = dataMovel[1];
+            dataMovel[1] = dataMovel[2];
+            dataMovel[2] = dataMovel[3];
+            dataMovel[3] = dataMovel[4];
+            dataMovel[4] = data;
             // implementar filtro aqui!
 
 
+            int mediaMovel = (dataMovel[0] + dataMovel[1] + dataMovel[2] + dataMovel[3] + dataMovel[4]) / 5; 
 
+            printf("%d \n",mediaMovel);
 
             // deixar esse delay!
             vTaskDelay(pdMS_TO_TICKS(50));
